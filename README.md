@@ -1,44 +1,102 @@
 # LexTrack — Hukuk Bürosu Dava Takip Sistemi
-BTS304 Final Ödevi — PyQt5 Masaüstü Uygulaması
 
-## Kurulum
+BTS304 Veritabanı Yönetim Sistemleri II — Final Ödevi
+Python (PyQt5) + MySQL ile geliştirilmiş masaüstü uygulaması.
 
-### 1. Bağımlılıkları Kur
+---
+
+## 🎯 Özellikler
+
+- Müşteri, Avukat, Dava, Duruşma, Belge, Masraf, Ödeme, Görev yönetimi
+- N-Katmanlı mimari (DAL → BLL → UI)
+- Tüm veritabanı işlemleri Stored Procedure üzerinden
+- 3 View, 3 Trigger, 2 Function, 2 Transaction prosedürü
+
+---
+
+## 📋 Gereksinimler
+
+- Python 3.10+
+- MySQL Server 8.0+
+- MySQL Workbench (veritabanını kurmak için)
+
+---
+
+## ⚙️ Kurulum
+
+### 1. Projeyi indir
+```bash
+git clone https://github.com/KULLANICI_ADI/lextrack-hukuk-sistemi.git
+cd lextrack-hukuk-sistemi
 ```
+
+### 2. Python kütüphanelerini kur
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Veritabanını Oluştur
-MySQL Workbench veya komut satırı ile:
-```
-SOURCE database/hukuk_burosu.sql
-```
+### 3. Veritabanını oluştur
+MySQL Workbench'i aç:
+- **File → Open SQL Script** → `database/hukuk_burosu.sql` seç
+- **⚡ (Execute)** butonuna tıkla
+- Veritabanı, tablolar, stored procedure'ler, trigger'lar, view'ler ve örnek veriler otomatik oluşur
 
-### 3. Bağlantı Ayarları
-`config.py` dosyasını açın ve MySQL bilgilerinizi girin:
+### 4. Bağlantı ayarlarını yap
+`config.py` dosyasını aç, MySQL şifreni gir:
 ```python
-DB_PASSWORD = 'mysql_sifreniz'
+class Config:
+    DB_HOST     = 'localhost'
+    DB_PORT     = 3306
+    DB_USER     = 'root'
+    DB_PASSWORD = 'BURAYA_MYSQL_SIFRENI_YAZ'
+    DB_NAME     = 'hukuk_burosu'
 ```
 
-### 4. Uygulamayı Çalıştır
-```
+### 5. Uygulamayı çalıştır
+```bash
 python main.py
 ```
 
-## Mimari
+---
+
+## 🗂️ Proje Yapısı
+
 ```
 lextrack/
-├── main.py               → Giriş noktası
-├── config.py             → Veritabanı ayarları
-├── dal/                  → Veri Erişim Katmanı (DAL)
-│   ├── db.py             → MySQL bağlantısı
-│   └── *_dal.py          → Stored Procedure çağrıları
-├── bll/                  → İş Katmanı (BLL)
-│   └── services.py       → Doğrulama ve iş kuralları
-├── ui/                   → Sunum Katmanı (PL)
-│   ├── main_window.py    → Ana pencere
-│   ├── *_ui.py           → CRUD arayüzleri
-│   └── style.py          → QSS stilleri
-└── database/
-    └── hukuk_burosu.sql  → Veritabanı scripti
+├── main.py                  # Başlangıç noktası
+├── config.py                # Veritabanı ayarları
+├── requirements.txt         # Python kütüphaneleri
+├── database/
+│   └── hukuk_burosu_TEMIZ.sql   # Veritabanı scripti (tek dosya)
+├── dal/                     # Veri Erişim Katmanı (Stored Procedure çağrıları)
+│   ├── db.py
+│   ├── avukat_dal.py
+│   ├── musteri_dal.py
+│   ├── dava_dal.py
+│   └── ...
+├── bll/                     # İş Katmanı (doğrulama, iş kuralları)
+│   └── services.py
+└── ui/                      # Sunum Katmanı (PyQt5 arayüz)
+    ├── main_window.py
+    ├── dashboard_ui.py
+    └── ...
 ```
+
+---
+
+## 🏛️ Mimari
+
+| Katman | Sorumluluk |
+|--------|-----------|
+| **UI (Sunum)** | PyQt5 pencereleri ve formları |
+| **BLL (İş)** | Doğrulama ve iş kuralları |
+| **DAL (Veri Erişim)** | Sadece Stored Procedure çağrıları |
+
+> **Önemli:** Hiçbir katmanda doğrudan SQL kodu (SELECT/INSERT/UPDATE/DELETE) yoktur. Tüm veritabanı işlemleri DAL katmanında Stored Procedure ile yapılır.
+
+---
+
+## 👤 Geliştirici
+
+[Umut Kağan Ceylan] — [23010708011]
+Bartın Üniversitesi — Bilgisayar Teknolojisi ve Bilişim Sistemleri
