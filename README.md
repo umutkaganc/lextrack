@@ -25,6 +25,11 @@ Python (PyQt5) + MySQL ile geliştirilmiş masaüstü uygulaması.
 ## ⚙️ Kurulum
 
 ### 1. Projeyi indir
+
+**Yöntem A — ZIP olarak (kolay):**
+GitHub'da yeşil **Code** butonuna tıkla → **Download ZIP** → indir → klasöre çıkart
+
+**Yöntem B — Git ile:**
 ```bash
 git clone https://github.com/KULLANICI_ADI/lextrack-hukuk-sistemi.git
 cd lextrack-hukuk-sistemi
